@@ -11,10 +11,6 @@ const question = (str) => new Promise((resolve) => rl.question(str, resolve));
 let nums;
 let alvo;
 
-// descrição
-console.log(`Questão 01 - Dado um array de números inteiros, retornaremos os índices de dois números
- de forma que eles se somem a um alvo específico.`);
-
 // lógica aplicada
 const runApp = () => {
   let i = 1;
@@ -43,6 +39,8 @@ const runApp = () => {
 // perguntas para obter dados dinamicos
 const steps = {
   start: async () => {
+    console.log(`Questão 01 - Dado um array de números inteiros, retornaremos os índices de dois
+    números de forma que eles se somem a um alvo específico.\n`);
     steps.array();
   },
   array: async () => {
