@@ -33,11 +33,11 @@ const runApp = () => {
   let correspondingIndex = -1;
 
   for (let i = 0; i < brackets.length; i += 1) {
-    const bracketType = getBracketType(brackets[i]);
+    const bracketCloseType = getBracketType(brackets[i]);
 
-    if (bracketType) {
+    if (bracketCloseType) {
       correspondingIndex += 2;
-      state = bracketType.open === brackets[i - correspondingIndex];
+      state = bracketCloseType.open === brackets[i - correspondingIndex];
     }
 
     if (!state) break;
