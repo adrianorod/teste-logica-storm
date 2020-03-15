@@ -1,43 +1,6 @@
-// config inicial
 const { rl, question } = require('../../utils');
+const runApp = require('./app');
 
-const bracketTypes = [
-  {
-    open: '(',
-    close: ')',
-  },
-  {
-    open: '{',
-    close: '}',
-  },
-  {
-    open: '[',
-    close: ']',
-  },
-];
-
-// lógica aplicada
-const getBracketType = (bracket) => bracketTypes.find((item) => item.close === bracket);
-
-const runApp = (brackets) => {
-  let state = true;
-  let correspondingIndex = -1;
-
-  for (let i = 0; i < brackets.length; i += 1) {
-    const bracketCloseType = getBracketType(brackets[i]);
-
-    if (bracketCloseType) {
-      correspondingIndex += 2;
-      state = bracketCloseType.open === brackets[i - correspondingIndex];
-    }
-
-    if (!state) break;
-  }
-
-  console.log(`Está balanceado? ${state ? 'SIM' : 'NAO'}.`);
-};
-
-// perguntas para obter dados dinamicos
 const steps = {
   start: async () => {
     console.log(`Questão 02 - Dado sequencias de caracteres, determine se cada sequência de brackets
@@ -46,12 +9,12 @@ const steps = {
   },
   brackets: async () => {
     const data = await question('Insira uma sequencia de brackets. Ex: {[()]}: ');
-    const brackets = data.match(/.{1}/g);
-    steps.end(brackets);
+    steps.end(data);
   },
-  end: async (brackets) => {
+  end: async (data) => {
     rl.close();
-    runApp(brackets);
+    const result = runApp(data);
+    console.log(`Está balanceado? ${result ? 'SIM' : 'NAO'}.`);
   },
 };
 
