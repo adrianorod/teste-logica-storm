@@ -16,12 +16,10 @@ const bracketTypes = [
   },
 ];
 
-let brackets;
-
 // lógica aplicada
 const getBracketType = (bracket) => bracketTypes.find((item) => item.close === bracket);
 
-const runApp = () => {
+const runApp = (brackets) => {
   let state = true;
   let correspondingIndex = -1;
 
@@ -48,12 +46,12 @@ const steps = {
   },
   brackets: async () => {
     const data = await question('Insira uma sequencia de brackets. Ex: {[()]}: ');
-    brackets = data.match(/.{1}/g);
-    steps.end();
+    const brackets = data.match(/.{1}/g);
+    steps.end(brackets);
   },
-  end: async () => {
+  end: async (brackets) => {
     rl.close();
-    runApp();
+    runApp(brackets);
   },
 };
 
