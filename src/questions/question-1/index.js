@@ -2,24 +2,24 @@
 const { rl, question } = require('../../utils');
 
 let nums;
-let alvo;
+let target;
 
 // lógica aplicada
-const runApp = () => {
+const runApp = (arr, tg) => {
   let i = 1;
   let startIndex = 0;
 
   for (;;) {
-    const result = nums[startIndex] + nums[i];
+    const result = arr[startIndex] + arr[i];
 
-    if (result === alvo) {
+    if (result === tg) {
       console.log([startIndex, i]);
       break;
     }
 
-    if (i < nums.length - 1) {
+    if (i < arr.length - 1) {
       i += 1;
-    } else if (startIndex < nums.length - 1) {
+    } else if (startIndex < arr.length - 1) {
       startIndex += 1;
       i = startIndex + 1;
     } else {
@@ -44,23 +44,23 @@ const steps = {
       console.error(`Formato inesperado de array informado (${nums}). Tente novamente.`);
       steps.array();
     } else {
-      steps.alvo();
+      steps.target();
     }
   },
-  alvo: async () => {
+  target: async () => {
     const data = await question('Insira o alvo - deve ser um número inteiro (Ex.: 9): ');
-    alvo = JSON.parse(data);
+    target = JSON.parse(data);
 
-    if (!Number.isInteger(alvo)) {
+    if (!Number.isInteger(target)) {
       console.error('Alvo informado não é inteiro. Tente novamente. Ex.: 9');
-      steps.alvo();
+      steps.target();
     } else {
       steps.end();
     }
   },
   end: async () => {
     rl.close();
-    runApp();
+    runApp(nums, target);
   },
 };
 
