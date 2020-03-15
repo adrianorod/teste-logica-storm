@@ -1,33 +1,9 @@
-// config inicial
 const { rl, question } = require('../../utils');
+const runApp = require('./app');
 
 let nums;
 let target;
 
-// lógica aplicada
-const runApp = (arr, tg) => {
-  let i = 1;
-  let startIndex = 0;
-
-  for (;;) {
-    const result = arr[startIndex] + arr[i];
-
-    if (result === tg) {
-      return [startIndex, i];
-    }
-
-    if (i < arr.length - 1) {
-      i += 1;
-    } else if (startIndex < arr.length - 1) {
-      startIndex += 1;
-      i = startIndex + 1;
-    } else {
-      return 0;
-    }
-  }
-};
-
-// perguntas para obter dados dinamicos
 const steps = {
   start: async () => {
     console.log(`Questão 01 - Dado um array de números inteiros, retornaremos os índices de dois
@@ -65,4 +41,3 @@ const steps = {
 };
 
 steps.start();
-module.exports = runApp;

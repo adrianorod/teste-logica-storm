@@ -1,4 +1,4 @@
-const runApp = require('./index');
+const runApp = require('./app');
 
 describe('QUESTION 1', () => {
   const arrMock = [2, 7, 11, 15];
