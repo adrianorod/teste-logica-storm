@@ -1,30 +1,6 @@
-// config inicial
 const { rl, question } = require('../../utils');
+const runApp = require('./app');
 
-// lógica aplicada
-const runApp = (actions) => {
-  let i = 0;
-  let maxProfit = 0;
-  let startIndex = 0;
-  const limiter = actions.length - 1;
-
-  while (i < limiter) {
-    const profit = actions[i] - actions[startIndex];
-
-    if (profit > maxProfit) maxProfit = profit;
-
-    i += 1;
-
-    if (i === limiter && startIndex < limiter) {
-      startIndex += 1;
-      i = startIndex + 1;
-    }
-  }
-
-  console.log('Lucro máximo:', maxProfit);
-};
-
-// perguntas para obter dados dinamicos
 const steps = {
   start: async () => {
     console.log(`Questão 03 - Dado um um array para o qual o elemento i é o preço de uma determinada
@@ -45,7 +21,8 @@ const steps = {
   },
   end: async (actions) => {
     rl.close();
-    runApp(actions);
+    const maxProfit = runApp(actions);
+    console.log('Lucro máximo: ', maxProfit);
   },
 };
 

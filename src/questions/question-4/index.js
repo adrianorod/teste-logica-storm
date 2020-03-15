@@ -1,37 +1,6 @@
-// config inicial
 const { rl, question } = require('../../utils');
+const runApp = require('./app');
 
-// lógica aplicada
-const runApp = (elevations) => {
-  let startBlock = -1;
-  let waterValue = 0;
-  let waterAccumulator = 0;
-
-  for (let i = 0; i < elevations.length; i += 1) {
-    const next = i + 1;
-
-    if (startBlock < 0 && elevations[i] > elevations[next]) {
-      startBlock = i;
-    }
-
-    if (startBlock >= 0 && elevations[startBlock] > elevations[next]) {
-      waterAccumulator += elevations[startBlock] - elevations[next];
-    } else {
-      waterValue += (
-        elevations[next + 1] || elevations[startBlock] === elevations[next]
-          ? waterAccumulator
-          : 0
-      );
-      i = !elevations[next + 1] && elevations[startBlock + 1] ? startBlock : i;
-      waterAccumulator = 0;
-      startBlock = -1;
-    }
-  }
-
-  console.log('Água retida: ', waterValue);
-};
-
-// perguntas para obter dados dinamicos
 const steps = {
   start: async () => {
     console.log(`Questão 04 - Dados n inteiros não negativos representando um mapa de elevação
@@ -51,7 +20,8 @@ const steps = {
   },
   end: async (elevations) => {
     rl.close();
-    runApp(elevations);
+    const waterValue = runApp(elevations);
+    console.log('Água retida: ', waterValue);
   },
 };
 
