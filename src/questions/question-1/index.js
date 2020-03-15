@@ -13,8 +13,7 @@ const runApp = (arr, tg) => {
     const result = arr[startIndex] + arr[i];
 
     if (result === tg) {
-      console.log([startIndex, i]);
-      break;
+      return [startIndex, i];
     }
 
     if (i < arr.length - 1) {
@@ -23,8 +22,7 @@ const runApp = (arr, tg) => {
       startIndex += 1;
       i = startIndex + 1;
     } else {
-      console.log('Nenhum alvo foi encontrado.');
-      break;
+      return 0;
     }
   }
 };
@@ -60,8 +58,11 @@ const steps = {
   },
   end: async () => {
     rl.close();
-    runApp(nums, target);
+    const result = runApp(nums, target);
+    if (result) console.log(result);
+    else console.log('Nenhum alvo foi encontrado.');
   },
 };
 
 steps.start();
+module.exports = runApp;
