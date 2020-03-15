@@ -16,7 +16,7 @@ const runApp = (elevations) => {
       waterAccumulator += elevations[startBlock] - elevations[next];
     } else {
       waterValue += (
-        elevations[next + 1] || elevations[startBlock] === elevations[next]
+        elevations[next + 1] || elevations[startBlock] <= elevations[next]
           ? waterAccumulator
           : 0
       );
